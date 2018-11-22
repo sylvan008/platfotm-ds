@@ -15,24 +15,29 @@
 
           <b-nav pills>
             <b-nav-item
-              tag="nuxt-link"
-              to="/contest">Contest
+              :to="$i18n.path('contest')"
+              tag="nuxt-link">
+              {{ $t('links.contest') }}
             </b-nav-item>
             <b-nav-item
-              tag="nuxt-link"
-              to="/problem">Problem
+              :to="$i18n.path('problem')"
+              tag="nuxt-link">
+              {{ $t('links.problem') }}
             </b-nav-item>
             <b-nav-item
-              tag="nuxt-link"
-              to="/forum">Forum
+              :to="$i18n.path('forum')"
+              tag="nuxt-link">
+              {{ $t('links.forum') }}
             </b-nav-item>
             <b-nav-item
-              tag="nuxt-link"
-              to="/leaderboard">Leaderboard
+              :to="$i18n.path('leaderboard')"
+              tag="nuxt-link">
+              {{ $t('links.leaderboard') }}
             </b-nav-item>
             <b-nav-item
-              tag="nuxt-link"
-              to="/team">My team
+              :to="$i18n.path('team')"
+              tag="nuxt-link">
+              {{ $t('links.team') }}
             </b-nav-item>
           </b-nav>
 
