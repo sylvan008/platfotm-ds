@@ -1,0 +1,11 @@
+{
+  "title": "Платформа DataSoul",
+  "greetings": "Здрасьте!",
+  "links": {
+    "contest": "О соревновании",
+    "problem": "Задачи",
+    "forum": "Форум",
+    "leaderboard": "Рейтинг",
+    "team": "Команда"
+  }
+}

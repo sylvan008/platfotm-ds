@@ -1,0 +1,11 @@
+{
+  "title": "DataSoul's Platform",
+  "greetings": "Greeting!",
+  "links": {
+    "contest": "About contest",
+    "problem": "Task",
+    "forum": "Forum",
+    "leaderboard": "Leaderboard",
+    "team": "Team"
+  }
+}

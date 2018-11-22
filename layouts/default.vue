@@ -59,7 +59,6 @@
       </div>
     </b-navbar>
 
-    <h1>Я порабощу мир Веба!</h1>
     <nuxt/>
 
     <footer>
@@ -69,6 +68,7 @@
 </template>
 
 <script>
+
   export default {
 
   }
