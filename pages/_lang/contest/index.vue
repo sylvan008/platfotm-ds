@@ -1,5 +1,9 @@
 <template>
-  <h1>About Competition</h1>
+  <section>
+    <div class="container">
+      <h1>About Competition</h1>
+    </div>
+  </section>
 </template>
 
 <script>

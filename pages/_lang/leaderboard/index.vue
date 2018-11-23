@@ -1,5 +1,9 @@
 <template>
-  <h1>Leaderboard</h1>
+  <section>
+    <div class="container">
+      <h1>Leaderboard</h1>
+    </div>
+  </section>
 </template>
 
 <script>
