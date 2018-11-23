@@ -72,7 +72,17 @@ module.exports = {
     }
   },
   router: {
-    middleware: 'i18n'
+    middleware: 'i18n',
+    extendRoutes(routes) {
+      for (let rt of routes) {
+        if (rt.name === 'index') {
+          rt.redirect = {path: '/contest'}
+        }
+        if (rt.name === 'lang') {
+          rt.redirect = {path: '/:lang/contest'}
+        }
+      }
+    }
   },
   generate: {
     routes: ['/']
