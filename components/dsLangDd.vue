@@ -28,19 +28,19 @@
       },
       rusRoute: function() {
         // $route.fullPath.replace(/^\/[^\/]+/, '')
-        return this.sliceLangPath()
+        return this.switchLang('ru')
       },
       englishRoute: function() {
-        return '/en' + this.sliceLangPath()
+        return this.switchLang('en')
       }
     },
     methods: {
-      sliceLangPath: function() {
+      switchLang: function(lang) {
         let path = this.$route.fullPath;
-        if (path.includes('/en')) {
-          path = path.slice(3);
+        if (this.$route.params.lang) {
+          return `/${lang}${path.slice(3)}`;
         }
-        return path;
+        return `/${lang}${path}`;
       }
     }
   }
