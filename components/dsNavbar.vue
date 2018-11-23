@@ -41,21 +41,8 @@
 
         <b-navbar-nav class="ml-auto">
 
-          <b-dropdown
-            text="Lang"
-            right>
-            <b-dropdown-item href="#">EN</b-dropdown-item>
-            <b-dropdown-item href="#">RU</b-dropdown-item>
-          </b-dropdown>
+          <ds-lang-dd />
 
-          <b-nav-item-dropdown right>
-            <!-- Using button-content slot -->
-            <template slot="button-content">
-              <em>User</em>
-            </template>
-            <b-dropdown-item href="#">Profile</b-dropdown-item>
-            <b-dropdown-item href="#">Signout</b-dropdown-item>
-          </b-nav-item-dropdown>
         </b-navbar-nav>
       </b-collapse>
 
@@ -64,8 +51,12 @@
 </template>
 
 <script>
+  import DsLangDd from '~/components/DsLangDd';
   export default {
-    name: "DsNavbar"
+    name: "DsNavbar",
+    components: {
+      'ds-lang-dd': DsLangDd
+    }
   }
 </script>
 
