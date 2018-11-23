@@ -5,17 +5,17 @@
 
     <nuxt/>
 
-    <footer>
-      <h2>Its footer time!</h2>
-    </footer>
+    <ds-footer />
   </div>
 </template>
 
 <script>
-  import DsNavbar from '~/components/dsNavbar'
+  import DsNavbar from '~/components/dsNavbar';
+  import DsFooter from '~/components/dsFooter';
   export default {
     components: {
-      'ds-navbar': DsNavbar
+      'ds-navbar': DsNavbar,
+      'ds-footer': DsFooter,
     }
   }
 </script>
