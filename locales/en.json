@@ -7,5 +7,22 @@
     "forum": "Forum",
     "leaderboard": "Leaderboard",
     "team": "Team"
+  },
+  "pages": {
+    "contest": {
+      "title": "About contest"
+    },
+    "problem": {
+      "title": "Task"
+    },
+    "forum": {
+      "title": "Forum"
+    },
+    "leaderboard": {
+      "title": "Leaderboard"
+    },
+    "team": {
+      "title": "My Team"
+    }
   }
 }
