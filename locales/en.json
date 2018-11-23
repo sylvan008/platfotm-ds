@@ -10,10 +10,10 @@
   },
   "pages": {
     "contest": {
-      "title": "About contest"
+      "title": "About Contest"
     },
     "problem": {
-      "title": "Task"
+      "title": "Tasks Description"
     },
     "forum": {
       "title": "Forum"
