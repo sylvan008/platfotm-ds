@@ -42,7 +42,8 @@
         <b-navbar-nav class="ml-auto">
 
           <ds-lang-dd />
-
+          <b-btn v-b-modal="'login-modal'">Войти</b-btn>
+          <ds-modal-login />
         </b-navbar-nav>
       </b-collapse>
 
@@ -52,10 +53,12 @@
 
 <script>
   import DsLangDd from '~/components/DsLangDd';
+  import DsModalLogin from './dsModalLogin';
   export default {
     name: "DsNavbar",
     components: {
-      'ds-lang-dd': DsLangDd
+      'ds-lang-dd': DsLangDd,
+      'ds-modal-login': DsModalLogin
     }
   }
 </script>
