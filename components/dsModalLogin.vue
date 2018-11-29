@@ -2,7 +2,7 @@
   <b-modal
     id="login-modal"
     hide-footer
-    @shown="clear">
+    @shown="clear(form)">
     <b-form @submit.prevent="onSignUp">
       <b-form-group
         label="Email:"
@@ -52,10 +52,10 @@
       onSignUp() {
         return ''
       },
-      clear() {
-        for (let prop in this.form) {
-          if (this.form.hasOwnProperty(prop)) {
-            this.form[prop] = '';
+      clear(form) {
+        for (let prop in form) {
+          if (Object.prototype.hasOwnProperty.call(form, prop)) {
+            form[prop] = '';
           }
         }
       }
