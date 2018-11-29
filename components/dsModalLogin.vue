@@ -54,7 +54,9 @@
       },
       clear() {
         for (let prop in this.form) {
-          this.form[prop] = '';
+          if (this.form.hasOwnProperty(prop)) {
+            this.form[prop] = '';
+          }
         }
       }
     }
