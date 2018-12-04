@@ -5,6 +5,7 @@
     variant="light">
     <div class="container">
       <b-navbar-brand href="#">DataSoul</b-navbar-brand>
+      <!--suppress CheckEmptyScriptTag -->
       <b-navbar-toggle target="nav_collapse"/>
 
       <b-collapse
@@ -42,6 +43,7 @@
         <b-navbar-nav class="ml-auto">
 
           <ds-lang-dd />
+          <ds-user-dd v-if="$store.state.user.status === 'success'" />
           <b-btn v-b-modal="'login-modal'">Войти</b-btn>
           <ds-modal-login />
         </b-navbar-nav>
@@ -53,11 +55,14 @@
 
 <script>
   import DsLangDd from '~/components/DsLangDd';
+  import DsUserDd from './dsUserDd';
   import DsModalLogin from './dsModalLogin';
+
   export default {
     name: "DsNavbar",
     components: {
       'ds-lang-dd': DsLangDd,
+      'ds-user-dd': DsUserDd,
       'ds-modal-login': DsModalLogin
     }
   }
