@@ -38,6 +38,9 @@
 </template>
 
 <script>
+  import { mapActions } from 'vuex';
+  import {AUTH_REQUEST} from "../assets/constants/auth";
+
   export default {
     name: "DsModalLogin",
     data() {
@@ -49,8 +52,17 @@
       }
     },
     methods: {
+      ...mapActions({
+        [AUTH_REQUEST]: `auth/${AUTH_REQUEST}`
+      }),
       onSignUp() {
-        return ''
+        const { email, password } = this.form;
+        this.AUTH_REQUEST ({ email, password })
+          .then(() => {
+            const lang = this.$store.state.locale;
+            this.$router.push({ name: 'index', params: {lang} });
+          })
+          .catch((err) => console.log(err));
       },
       clear(form) {
         for (let prop in form) {
