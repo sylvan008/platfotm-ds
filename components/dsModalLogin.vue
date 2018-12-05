@@ -1,6 +1,7 @@
 <template>
   <b-modal
     id="login-modal"
+    ref="dsModalLogin"
     hide-footer
     @shown="clear(form)">
     <b-form @submit.prevent="onSignUp">
@@ -61,6 +62,7 @@
           .then(() => {
             const lang = this.$store.state.locale;
             this.$router.push({ name: 'index', params: {lang} });
+            this.hideModal()
           })
           .catch((err) => console.log(err));
       },
@@ -70,6 +72,12 @@
             form[prop] = '';
           }
         }
+      },
+      showModal() {
+        this.$refs.dsModalLogin.show();
+      },
+      hideModal() {
+        this.$refs.dsModalLogin.hide();
       }
     }
   }
