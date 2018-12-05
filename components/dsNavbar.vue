@@ -43,8 +43,12 @@
         <b-navbar-nav class="ml-auto">
 
           <ds-lang-dd />
-          <ds-user-dd v-if="$store.state.user.status === 'success'" />
-          <b-btn v-b-modal="'login-modal'">Войти</b-btn>
+          <ds-user-dd v-if="isLogin" />
+          <b-btn
+            v-b-modal="'login-modal'"
+            v-if="!isLogin">
+            Войти
+          </b-btn>
           <ds-modal-login />
         </b-navbar-nav>
       </b-collapse>
@@ -64,6 +68,11 @@
       'ds-lang-dd': DsLangDd,
       'ds-user-dd': DsUserDd,
       'ds-modal-login': DsModalLogin
+    },
+    computed: {
+      isLogin() {
+        return this.$store.state.user.status === 'success'
+      }
     }
   }
 </script>
