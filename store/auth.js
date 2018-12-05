@@ -41,9 +41,9 @@ export const actions = {
           const token = response.token;
           localStorage.setItem('user-token', token);
           commit(AUTH_SUCCESS, token);
-          dispatch(`user/${USER_REQUEST}`, null, { root: true });
-          resolve(response);
+          return dispatch(`user/${USER_REQUEST}`, null, { root: true })
         })
+        .then(() => {resolve()})
         .catch(error => {
           commit(AUTH_ERROR, error);
           localStorage.removeItem('user-token');

@@ -14,16 +14,20 @@ export const getters = {
 
 export const actions = {
   [USER_REQUEST]: ({commit, dispatch}) => {
-    commit(USER_REQUEST);
-    apiCall({url: 'user/me'})
-      .then(resp => {
-        commit(USER_SUCCESS, resp)
-      })
-      .catch(resp => {
-        commit(USER_ERROR);
-        // if resp is unauthorized, logout, to
-        dispatch(`auth/${AUTH_LOGOUT}`, null, { root: true })
-      })
+    return new Promise((resolve, reject) => {
+      commit(USER_REQUEST);
+      apiCall({url: 'user/me'})
+        .then(resp => {
+          commit(USER_SUCCESS, resp);
+          resolve();
+        })
+        .catch(resp => {
+          commit(USER_ERROR);
+          // if resp is unauthorized, logout, to
+          dispatch(`auth/${AUTH_LOGOUT}`, null, { root: true });
+          reject(resp);
+        })
+    });
   },
 };
 
