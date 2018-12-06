@@ -49,7 +49,7 @@
             v-if="!isLogin">
             Войти
           </b-btn>
-          <ds-modal-login />
+          <ds-modal-login v-if="!isLogin"/>
         </b-navbar-nav>
       </b-collapse>
 
