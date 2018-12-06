@@ -9,11 +9,13 @@
         class="lang-flag">
     </template>
     <b-dropdown-item
-      :href="rusRoute">
+      :to="{ name: this.$router.name, params: {lang: 'ru'}}"
+      replace>
       Русский
     </b-dropdown-item>
     <b-dropdown-item
-      :href="englishRoute">
+      :to="englishRoute"
+      replace>
       English
     </b-dropdown-item>
   </b-dropdown>
