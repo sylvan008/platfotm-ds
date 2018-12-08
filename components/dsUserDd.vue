@@ -8,7 +8,7 @@
         alt="user photo"
         class="user-avatar">
     </template>
-    <b-dropdown-item>
+    <b-dropdown-item v-b-modal="'profile-modal'">
       Мой профиль
     </b-dropdown-item>
     <b-dropdown-item>
