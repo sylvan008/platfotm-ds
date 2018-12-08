@@ -9,7 +9,7 @@
         class="lang-flag">
     </template>
     <b-dropdown-item
-      :to="{ name: this.$router.name, params: {lang: 'ru'}}"
+      :to="rusRoute"
       replace>
       Русский
     </b-dropdown-item>
@@ -30,19 +30,13 @@
       },
       rusRoute: function() {
         // $route.fullPath.replace(/^\/[^\/]+/, '')
-        return this.switchLang('ru')
+        return { name: `${this.$route.name}`, params: {lang: 'ru'}};
       },
       englishRoute: function() {
-        return this.switchLang('en')
-      }
-    },
-    methods: {
-      switchLang: function(lang) {
-        let path = this.$route.fullPath;
-        if (this.$route.params.lang) {
-          return `/${lang}${path.slice(3)}`;
+        if ( this.$store.state.locale !== this.$i18n.fallbackLocale ) {
+          return this.$route.fullPath;
         }
-        return `/${lang}${path}`;
+        return { name: `lang-${this.$route.name}`, params: {lang: 'en'}};
       }
     }
   }
