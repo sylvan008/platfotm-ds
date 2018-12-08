@@ -4,7 +4,13 @@ import apiCall from '../assets/utiles/api';
 
 export const state = () => ({
   status: '',
-  profile: {}
+  profile: {
+    name: '',
+    title: '',
+    email: '',
+    phone: '',
+    bio: ''
+  }
 });
 
 export const getters = {
@@ -18,7 +24,7 @@ export const actions = {
       commit(USER_REQUEST);
       apiCall({url: 'user/me'})
         .then(resp => {
-          commit(USER_SUCCESS, resp);
+          commit(USER_SUCCESS, resp.token); // TODO remove mock api
           resolve();
         })
         .catch(resp => {
