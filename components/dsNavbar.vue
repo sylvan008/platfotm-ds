@@ -50,6 +50,7 @@
             Войти
           </b-btn>
           <ds-modal-login v-if="!isLogin"/>
+          <ds-profile-modal v-if="isLogin"/>
         </b-navbar-nav>
       </b-collapse>
 
@@ -61,13 +62,15 @@
   import DsLangDd from '~/components/DsLangDd';
   import DsUserDd from './dsUserDd';
   import DsModalLogin from './dsModalLogin';
+  import DsProfileModal from './dsProfileModal';
 
   export default {
     name: "DsNavbar",
     components: {
       'ds-lang-dd': DsLangDd,
       'ds-user-dd': DsUserDd,
-      'ds-modal-login': DsModalLogin
+      'ds-modal-login': DsModalLogin,
+      'ds-profile-modal': DsProfileModal
     },
     computed: {
       isLogin() {
