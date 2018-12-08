@@ -61,7 +61,7 @@
         this.AUTH_REQUEST ({ email, password })
           .then(() => {
             const lang = this.$store.state.locale;
-            this.$router.push({ name: 'index', params: {lang} });
+            this.$router.push({ name: this.$route.name, params: {lang} });
             this.hideModal()
           })
           .catch((err) => console.log(err));
@@ -72,9 +72,6 @@
             form[prop] = '';
           }
         }
-      },
-      showModal() {
-        this.$refs.dsModalLogin.show();
       },
       hideModal() {
         this.$refs.dsModalLogin.hide();
