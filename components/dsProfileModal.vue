@@ -9,6 +9,7 @@
         <!--suppress CheckEmptyScriptTag -->
         <b-form-input
           id="email-input-form"
+          v-model="mail"
           type="email"
           disabled />
       </b-form-group>
@@ -46,6 +47,10 @@
 </template>
 
 <script>
+  import { createNamespacedHelpers } from 'vuex';
+  const { mapState, mapMutations } = createNamespacedHelpers('user');
+
+
   export default {
     name: "DsProfileModal",
     data() {
@@ -54,6 +59,24 @@
           bio: ''
         }
       }
+    },
+    computed: {
+      ...mapState({
+        mailState: state => state.profile.email
+      }),
+      mail: {
+        get() {
+          return this.$store.state.user.profile.email;
+        },
+        // set(value) {
+        //   this.setName(value)
+        // }
+      }
+    },
+    methods: {
+      // ...mapMutations([
+      //   'setName'
+      // ])
     }
   }
 </script>
