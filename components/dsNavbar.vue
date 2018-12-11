@@ -59,7 +59,7 @@
 </template>
 
 <script>
-  import DsLangDd from '~/components/DsLangDd';
+  import DsLangDd from '~/components/dsLangDd';
   import DsUserDd from './dsUserDd';
   import DsModalLogin from './dsModalLogin';
   import DsProfileModal from './dsProfileModal';
