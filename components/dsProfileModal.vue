@@ -9,7 +9,7 @@
         <!--suppress CheckEmptyScriptTag -->
         <b-form-input
           id="email-input-form"
-          :value="mail"
+          :value="mailState"
           type="email"
           disabled />
       </b-form-group>
@@ -19,12 +19,10 @@
         <!--suppress CheckEmptyScriptTag -->
         <b-form-input
           id="name-input-form"
-          v-model="form.name"
+          v-model="userName"
           type="text"
           required
-          placholder="Input full name">
-          {{ name }}
-        </b-form-input>
+          placholder="Input full name" />
       </b-form-group>
       <b-form-group
         label="Phone"
@@ -32,11 +30,9 @@
         <!--suppress CheckEmptyScriptTag -->
         <b-form-input
           id="phone-input-form"
-          v-model="form.phone"
+          v-model="userPhone"
           type="text"
-          placeholder="Input phone number" >
-          {{ phone }}
-        </b-form-input>
+          placeholder="Input phone number" />
       </b-form-group>
       <b-form-group
         label="Bio"
@@ -44,11 +40,10 @@
         <!--suppress CheckEmptyScriptTag -->
         <b-form-textarea
           id="input-bio-form"
-          v-model="form.bio"
+          v-model="userBio"
           :rows="3"
-          placeholder="Input something">
-          {{ bio }}
-        </b-form-textarea>
+          :placeholder="`${nameState || 'Друг'} , расскажи немного о себе`" />
+
       </b-form-group>
     </b-form>
   </b-modal>
@@ -61,24 +56,6 @@
 
   export default {
     name: "DsProfileModal",
-    props: {
-      // mail: {
-      //   type: String,
-      //   required: true
-      // },
-      name: {
-        type: String,
-        required: true
-      },
-      phone: {
-        type: String,
-        default: ''
-      },
-      bio: {
-        type: String,
-        default: ''
-      }
-    },
     data() {
       return {
         form: {
@@ -89,22 +66,36 @@
       }
     },
     computed: {
-      ...mapState('user', {
-        mailState: state => state.profile.email
+      ...mapState({
+        mailState: state => state.profile.email,
+        nameState: state => state.profile.name,
+        phoneState: state => state.profile.phone,
+        bioState: state => state.profile.bio
       }),
-      mail: {
+      userBio: {
         get() {
-          return this.$store.state.user.profile.email;
+          return this.form.bio || this.bioState
         },
-        // set(value) {
-        //   this.setName(value)
-        // }
+        set(value) {
+          this.form.bio = value
+        }
+      },
+      userPhone: {
+        get() {
+          return this.form.phone || this.phoneState
+        },
+        set(value) {
+          this.form.phone = value
+        }
+      },
+      userName: {
+        get() {
+          return this.form.name || this.nameState
+        },
+        set(value) {
+          this.form.name = value
+        }
       }
-    },
-    methods: {
-      // ...mapMutations([
-      //   'setName'
-      // ])
     }
   }
 </script>
