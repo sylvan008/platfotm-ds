@@ -9,7 +9,7 @@
         <!--suppress CheckEmptyScriptTag -->
         <b-form-input
           id="email-input-form"
-          v-model="mail"
+          :value="mail"
           type="email"
           disabled />
       </b-form-group>
@@ -19,9 +19,12 @@
         <!--suppress CheckEmptyScriptTag -->
         <b-form-input
           id="name-input-form"
+          v-model="form.name"
           type="text"
           required
-          placholder="Input full name" />
+          placholder="Input full name">
+          {{ name }}
+        </b-form-input>
       </b-form-group>
       <b-form-group
         label="Phone"
@@ -29,8 +32,11 @@
         <!--suppress CheckEmptyScriptTag -->
         <b-form-input
           id="phone-input-form"
+          v-model="form.phone"
           type="text"
-          placeholder="Input phone number" />
+          placeholder="Input phone number" >
+          {{ phone }}
+        </b-form-input>
       </b-form-group>
       <b-form-group
         label="Bio"
@@ -40,7 +46,9 @@
           id="input-bio-form"
           v-model="form.bio"
           :rows="3"
-          placeholder="Input something" />
+          placeholder="Input something">
+          {{ bio }}
+        </b-form-textarea>
       </b-form-group>
     </b-form>
   </b-modal>
@@ -53,15 +61,35 @@
 
   export default {
     name: "DsProfileModal",
+    props: {
+      // mail: {
+      //   type: String,
+      //   required: true
+      // },
+      name: {
+        type: String,
+        required: true
+      },
+      phone: {
+        type: String,
+        default: ''
+      },
+      bio: {
+        type: String,
+        default: ''
+      }
+    },
     data() {
       return {
         form: {
+          name: '',
+          phone: '',
           bio: ''
         }
       }
     },
     computed: {
-      ...mapState({
+      ...mapState('user', {
         mailState: state => state.profile.email
       }),
       mail: {
