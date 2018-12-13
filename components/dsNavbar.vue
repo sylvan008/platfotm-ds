@@ -59,6 +59,8 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   import DsLangDd from '~/components/dsLangDd';
   import DsUserDd from './dsUserDd';
   import DsModalLogin from './dsModalLogin';
@@ -73,8 +75,9 @@
       'ds-profile-modal': DsProfileModal
     },
     computed: {
+      ...mapGetters('auth', ['isAuthenticated']),
       isLogin() {
-        return this.$store.state.user.status === 'success'
+        return this.isAuthenticated
       }
     }
   }
