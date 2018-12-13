@@ -19,6 +19,7 @@ export const mutations = {
     state.status = 'error'
   },
   [AUTH_LOGOUT]: (state) => {
+    state.status = '';
     state.token = ''
   }
 };
@@ -53,6 +54,7 @@ export const actions = {
   },
   [AUTH_LOGOUT]: ({commit, dispatch}) => {
     return new Promise((resolve, reject) => {
+      commit(`user/${AUTH_LOGOUT}`, null, { root: true });
       commit(AUTH_LOGOUT);
       // TODO: localStorage.removeItem('user-token');
       resolve()
