@@ -11,15 +11,23 @@
     <b-dropdown-item v-b-modal="'profile-modal'">
       Мой профиль
     </b-dropdown-item>
-    <b-dropdown-item>
+    <b-dropdown-item @click="logout()">
       Выйти
     </b-dropdown-item>
   </b-dropdown>
 </template>
 
 <script>
+  import { mapActions } from 'vuex';
+
   export default {
-    name: "DsUserDd"
+    name: "DsUserDd",
+    methods: {
+      ...mapActions('auth', {'AUTH_LOGOUT': 'AUTH_LOGOUT'}),
+      logout() {
+        this.AUTH_LOGOUT();
+      }
+    }
   }
 </script>
 
