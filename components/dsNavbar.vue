@@ -46,11 +46,20 @@
           <ds-user-dd v-if="isLogin" />
           <b-btn
             v-b-modal="'login-modal'"
-            v-if="!isLogin">
+            v-show="!isLogin">
             Войти
           </b-btn>
-          <ds-modal-login v-if="!isLogin"/>
+
+          <b-btn
+            v-b-modal="'join-modal'"
+            v-if="isLogin">
+            Присоединиться
+          </b-btn>
+
+          <ds-modal-login v-show="!isLogin"/>
           <ds-profile-modal v-if="isLogin"/>
+          <ds-join-modal v-if="isLogin"/>
+
         </b-navbar-nav>
       </b-collapse>
 
@@ -65,6 +74,7 @@
   import DsUserDd from './dsUserDd';
   import DsModalLogin from './dsModalLogin';
   import DsProfileModal from './dsProfileModal';
+  import DsJoinModal from './DsJoinModal';
 
   export default {
     name: "DsNavbar",
@@ -72,7 +82,8 @@
       'ds-lang-dd': DsLangDd,
       'ds-user-dd': DsUserDd,
       'ds-modal-login': DsModalLogin,
-      'ds-profile-modal': DsProfileModal
+      'ds-profile-modal': DsProfileModal,
+      'ds-join-modal': DsJoinModal
     },
     computed: {
       ...mapGetters('auth', ['isAuthenticated']),
