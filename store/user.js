@@ -4,13 +4,7 @@ import apiCall from '../assets/utiles/api';
 
 export const state = () => ({
   status: '',
-  profile: {
-    name: '',
-    title: '',
-    email: '',
-    phone: '',
-    bio: ''
-  }
+  profile: {}
 });
 
 export const getters = {
