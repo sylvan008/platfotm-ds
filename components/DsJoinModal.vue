@@ -1,62 +1,63 @@
 <template>
   <b-modal
-    id="join-modal"
+    :id="idModal"
     hide-footer>
     <b-form>
-      <b-form-group
-        v-for="(item, index) in joinForm"
-        :label="item.label"
-        :label-for="item.id"
-        :key="index + 1">
-        <b-form-input
-          :value="$data[item.model]"
-          v-bind="item.inputAttr" />
-      </b-form-group>
+      <template v-for="(item, index) in joinForm">
+        <b-form-group
+          :label="item.label"
+          :label-for="item.id"
+          :key="++index">
+          <b-form-input
+            :value="$data.form[item.model] || getValue(inputValues, item.model)"
+            v-bind="item.inputAttr"
+            @input="update($event, form, item.model)"/>
+        </b-form-group>
+      </template>
     </b-form>
-    {{ joinForm[0].model }}
   </b-modal>
 </template>
 
 <script>
   import { createNamespacedHelpers } from 'vuex';
-  const { mapState, mapMutations } = createNamespacedHelpers('user');
+  const { mapMutations } = createNamespacedHelpers('user');
 
   export default {
     name: "DsJoinModal",
+    props: {
+      inputValues: {
+        type: Object,
+        required: true
+      },
+      idModal: {
+        type: String,
+        required: true
+      }
+    },
     data() {
       return {
-        form: {
-          surename: 'Ork',
-          firstName: 'Draks',
-        },
         joinForm: [
-          {label: 'Surename', model: 'form.surename', inputAttr: {id: 'surename-input-f',  type: 'text', placeholder: 'Фамилия'}},
-          {label: 'Name', model: 'this.form.firstName', inputAttr: {id: 'name-input-f', type: 'text', placeholder: 'Имя'}},
-          // {label: 'Last Name',    inputAttr: {id: 'lastname-input-f', 'v-model': 'lastName', type: 'text', placeholder: 'Отчество'}},
-          // {label: 'Birthday',     inputAttr: {id: 'birthday-input-f', 'v-model': 'birthday', type: 'date', placeholder: 'Дата рождения'}},
-          // {label: 'Phone number', inputAttr: {id: 'phone-input-f', 'v-model': 'phone', type: 'text', placeholder: 'Телефон'}},
-          // {label: 'Country',      inputAttr: {id: 'country-input-f', 'v-model': 'country', type: 'text', placeholder: 'Страна проживания'}},
-          // {label: 'Region',       inputAttr: {id: 'region-input-f', 'v-model': 'region', type: 'text', placeholder: 'Регион'}},
-          // {label: 'City',         inputAttr: {id: 'city-input-f', 'v-model': 'city', type: 'text', placeholder: 'Город проживания'}},
-          // {label: 'Occupation',   inputAttr: {id: 'occupation-input-f', 'v-model': 'occuption', type: 'text', placeholder: 'Место работы или учёбы', }},
-        ]
+          {label: 'Surename', model: 'surename', inputAttr: {id: 'surename-input-f', placeholder: 'Фамилия'}},
+          {label: 'Name', model: 'name', inputAttr: {id: 'name-input-f', type: 'text', placeholder: 'Имя'}},
+          {label: 'Last Name', model: 'lastName',    inputAttr: {id: 'lastname-input-f', placeholder: 'Отчество'}},
+          {label: 'Birthday', model: 'birthday', inputAttr: {id: 'birthday-input-f', type: 'date', placeholder: 'Дата рождения'}},
+          {label: 'Phone number', model: 'phone', inputAttr: {id: 'phone-input-f', placeholder: 'Телефон'}},
+          {label: 'Country', model: 'country', inputAttr: {id: 'country-input-f', placeholder: 'Страна проживания'}},
+          {label: 'Region', model: 'region', inputAttr: {id: 'region-input-f', placeholder: 'Регион'}},
+          {label: 'City', model: 'city', inputAttr: {id: 'city-input-f', placeholder: 'Город проживания'}},
+          {label: 'Occupation', model: 'occupation', inputAttr: {id: 'occupation-input-f', placeholder: 'Место работы или учёбы', }},
+        ],
+        form: {},
       }
     },
-    computed: {
-      ...mapState({
-        nameState: state => state.profile.name,
-      }),
-      surename: {
-        get() {
-          return this.nameState || 'No surename'
-        }
+    methods: {
+      getValue(inputObj, prop) {
+        return inputObj[prop] || ''
+      },
+      update(value, object, key) {
+        this.$set(object, key, value)
       }
-    },
-     computed: {
-      getName() {
-        return this.form.surename + ' ' + this.form.firstName
-      }
-     }
+    }
   }
 
 </script>

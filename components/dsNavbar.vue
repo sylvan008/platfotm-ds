@@ -58,7 +58,10 @@
 
           <ds-modal-login v-show="!isLogin"/>
           <ds-profile-modal v-if="isLogin"/>
-          <ds-join-modal v-if="isLogin"/>
+          <ds-join-modal
+            v-if="isLogin"
+            :input-values="joinProfile"
+            id-modal="join-modal"/>
 
         </b-navbar-nav>
       </b-collapse>
@@ -68,7 +71,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapState } from 'vuex';
 
   import DsLangDd from '~/components/dsLangDd';
   import DsUserDd from './dsUserDd';
@@ -87,6 +90,7 @@
     },
     computed: {
       ...mapGetters('auth', ['isAuthenticated']),
+      ...mapState('user', { joinProfile: state => state.profile}),
       isLogin() {
         return this.isAuthenticated
       }
