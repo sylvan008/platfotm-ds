@@ -24,5 +24,10 @@
     "team": {
       "title": "My Team"
     }
+  },
+  "btns": {
+    "join":"Join",
+    "login": "Login",
+    "send": "Send solution"
   }
 }

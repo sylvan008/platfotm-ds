@@ -47,13 +47,13 @@
           <b-btn
             v-b-modal="'login-modal'"
             v-show="!isLogin">
-            Войти
+            {{ $t('btns.login') }}
           </b-btn>
 
           <b-btn
             v-b-modal="'join-modal'"
             v-if="isLogin">
-            Присоединиться
+            {{ $t('btns.join') }}
           </b-btn>
 
           <ds-modal-login v-show="!isLogin"/>
