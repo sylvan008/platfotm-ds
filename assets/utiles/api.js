@@ -8,15 +8,15 @@ const mocks = {
       phone: '12345678888',
       bio: 'about me',
 
-      surename: 'Phathers',
-      name: 'my name',
-      lastName: 'my second name',
-      birthday: '1986',
+      surname: '', // my surname
+      name: '', // my name
+      patronymic: '', // my patronymic
+      birthday: '', // 1986
 
-      country: 'Russia',
-      region: 'region St.Petersburg',
-      city: 'St.Petersburg',
-      occupation: 'Data Soul'
+      country: '', // Russia
+      region: '', // region St.Petersburg
+      city: '', // St.Petersburg
+      occupation: '' // Data Soul
     }
   }
 };
