@@ -29,5 +29,29 @@
     "join":"Join",
     "login": "Login",
     "send": "Send solution"
+  },
+  "joinForm": {
+    "placeholder": {
+      "surname": "Surname",
+      "name": "Name",
+      "patronymic": "Patronymic",
+      "birthday": "Birthday",
+      "phone": "Phone number",
+      "country": "Country",
+      "region": "Region, state",
+      "city": "City",
+      "occupation": "Occupation"
+    },
+    "label": {
+      "surname": "Surname",
+      "name": "Name",
+      "patronymic": "Patronymic",
+      "birthday": "Birthday",
+      "phone": "Phone number",
+      "country": "Country",
+      "region": "Region",
+      "city": "City",
+      "occupation": "Occupation"
+    }
   }
 }

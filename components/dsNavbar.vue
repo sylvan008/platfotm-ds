@@ -61,6 +61,7 @@
           <ds-join-modal
             v-if="isLogin"
             :input-values="joinProfile"
+            :form-fields="joinForm"
             id-modal="join-modal"/>
 
         </b-navbar-nav>
@@ -87,6 +88,21 @@
       'ds-modal-login': DsModalLogin,
       'ds-profile-modal': DsProfileModal,
       'ds-join-modal': DsJoinModal
+    },
+    data() {
+      return {
+        joinForm: [
+          {label: this.$t('joinForm.label.surname'), value: 'surname', attrs: {id: 'surename-input-f', placeholder: this.$t('joinForm.placeholder.surname')}},
+          {label: this.$t('joinForm.label.name'), value: 'name', attrs: {id: 'name-input-f', type: 'text', placeholder: this.$t('joinForm.placeholder.name')}},
+          {label: this.$t('joinForm.label.patronymic'), value: 'patronymic', attrs: {id: 'lastname-input-f', placeholder: this.$t('joinForm.placeholder.patronymic')}},
+          {label: this.$t('joinForm.label.birthday'), value: 'birthday', attrs: {id: 'birthday-input-f', type: 'date', placeholder: this.$t('joinForm.placeholder.birthday')}},
+          {label: this.$t('joinForm.label.phone'), value: 'phone', attrs: {id: 'phone-input-f', placeholder: this.$t('joinForm.placeholder.phone')}},
+          {label: this.$t('joinForm.label.country'), value: 'country', attrs: {id: 'country-input-f', placeholder: this.$t('joinForm.placeholder.country')}},
+          {label: this.$t('joinForm.label.region'), value: 'region', attrs: {id: 'region-input-f', placeholder: this.$t('joinForm.placeholder.region')}},
+          {label: this.$t('joinForm.label.city'), value: 'city', attrs: {id: 'city-input-f', placeholder: 'joinForm.placeholder.city'}},
+          {phraseObject: 'joinForm', label: 'label.occupation', placeholder: 'placeholder.occupation', value: 'occupation', attrs: {id: 'occupation-input-f'}},
+        ]
+      }
     },
     computed: {
       ...mapGetters('auth', ['isAuthenticated']),
