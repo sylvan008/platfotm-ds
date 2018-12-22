@@ -1,18 +1,18 @@
 <template>
   <b-modal
     :id="idModal"
-    hide-footer>
+    hide-footer
+    @shown="initForm()">
     <b-form>
       <template v-for="(item, index) in formFields">
         <b-form-group
-          :label="$t(`${item.phraseObject}.${item.label}`)"
+          :label="$t(`${item.phraseObject}.${item.label}.${item.value}`)"
           :label-for="item.id"
           :key="++index">
           <b-form-input
-            :value="$data.form[item.value] || getValue(inputValues, item.value)"
-            :placeholder="$t(`${item.phraseObject}.${item.placeholder}`)"
-            v-bind="item.attrs"
-            @input="update($event, form, item.value)"/>
+            v-model="$data.form[item.value]"
+            :placeholder="$t(`${item.phraseObject}.${item.placeholder}.${item.value}`)"
+            v-bind="item.attrs"/>
         </b-form-group>
       </template>
     </b-form>
@@ -44,12 +44,12 @@
         form: {},
       }
     },
+    created() {
+      this.initForm()
+    },
     methods: {
-      getValue(inputObj, prop) {
-        return inputObj[prop] || ''
-      },
-      update(value, object, key) {
-        this.$set(object, key, value)
+      initForm() {
+        this.form = Object.assign({}, this.inputValues)
       }
     }
   }
