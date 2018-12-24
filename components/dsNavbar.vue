@@ -50,19 +50,17 @@
             {{ $t('btns.login') }}
           </b-btn>
 
-          <b-btn
-            v-b-modal="'join-modal'"
-            v-if="isLogin">
-            {{ $t('btns.join') }}
-          </b-btn>
-
           <ds-modal-login v-show="!isLogin"/>
           <ds-profile-modal v-if="isLogin"/>
+
           <ds-join-modal
             v-if="isLogin && $store.state.user.status === 'success'"
             :input-values="joinProfile"
             :form-fields="joinForm"
             id-modal="join-modal"/>
+
+          <ds-submit-modal
+            id-modal="submit-modal"/>
 
         </b-navbar-nav>
       </b-collapse>
@@ -79,6 +77,7 @@
   import DsModalLogin from './dsModalLogin';
   import DsProfileModal from './dsProfileModal';
   import DsJoinModal from './DsJoinModal';
+  import DsSubmitModal from './DsSubmitModal';
 
   export default {
     name: "DsNavbar",
@@ -87,7 +86,8 @@
       'ds-user-dd': DsUserDd,
       'ds-modal-login': DsModalLogin,
       'ds-profile-modal': DsProfileModal,
-      'ds-join-modal': DsJoinModal
+      'ds-join-modal': DsJoinModal,
+      'ds-submit-modal': DsSubmitModal
     },
     data() {
       return {
