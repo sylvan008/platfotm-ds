@@ -4,7 +4,8 @@ import apiCall from '../assets/utiles/api';
 
 export const state = () => ({
   status: '',
-  profile: {}
+  profile: {},
+  join: false
 });
 
 export const getters = {
@@ -29,6 +30,20 @@ export const actions = {
         })
     });
   },
+  USER_JOIN: ({commit, dispatch}, joinData) => {
+    return new Promise((resolve, reject) => {
+      const data = JSON.stringify(joinData);
+      apiCall({url: 'user/join', method: 'POST', data})
+        .then(resp => {
+          commit('user_join', resp);
+          resolve();
+        })
+        .catch(err => {
+          console.log('Error:', err);
+          reject(err);
+        })
+    })
+  }
 };
 
 export const mutations = {
@@ -45,5 +60,8 @@ export const mutations = {
   [AUTH_LOGOUT]: (state) => {
     state.status = '';
     state.profile = {}
+  },
+  user_join: (state, resp) => {
+    state.join = resp.token.join
   }
 };

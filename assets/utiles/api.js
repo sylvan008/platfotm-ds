@@ -18,7 +18,8 @@ const mocks = {
       city: 'St.Petersburg', // St.Petersburg
       occupation: 'Data Soul' // Data Soul
     }
-  }
+  },
+  'user/join': { 'POST': {join: true} }
 };
 
 const apiCall = ({ url, method }) => new Promise((resolve, reject) => {
