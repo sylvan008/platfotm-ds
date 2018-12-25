@@ -54,12 +54,13 @@
           <ds-profile-modal v-if="isLogin"/>
 
           <ds-join-modal
-            v-if="isLogin && $store.state.user.status === 'success'"
+            v-if="(isLogin && !$store.state.user.join)"
             :input-values="joinProfile"
             :form-fields="joinForm"
             id-modal="join-modal"/>
 
           <ds-submit-modal
+            v-if="$store.state.user.join"
             id-modal="submit-modal"/>
 
         </b-navbar-nav>

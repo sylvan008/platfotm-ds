@@ -21,6 +21,7 @@
               v-bind="item.attrs"/>
           </b-form-group>
         </template>
+        <b-btn @click="join()">Присоединиться</b-btn>
       </b-form>
     </b-modal>
   </div>
@@ -29,7 +30,7 @@
 
 <script>
   import { createNamespacedHelpers } from 'vuex';
-  const { mapMutations } = createNamespacedHelpers('user');
+  const { mapMutations, mapActions } = createNamespacedHelpers('user');
 
   export default {
     name: "DsJoinModal",
@@ -56,8 +57,12 @@
       this.initForm()
     },
     methods: {
+      ...mapActions(['USER_JOIN']),
       initForm() {
         this.form = Object.assign({}, this.inputValues)
+      },
+      join() {
+        this.USER_JOIN(this.form)
       }
     }
   }
