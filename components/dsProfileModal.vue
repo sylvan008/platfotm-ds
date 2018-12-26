@@ -10,6 +10,7 @@
         <b-form-input
           id="email-input-form"
           :value="mailState"
+          :placeholder="$t('profileModal.placeholder.email')"
           type="email"
           disabled />
       </b-form-group>
@@ -20,9 +21,9 @@
         <b-form-input
           id="name-input-form"
           v-model="userName"
+          :placeholder="$t('profileModal.placeholder.name')"
           type="text"
-          required
-          placholder="Input full name" />
+          required/>
       </b-form-group>
       <b-form-group
         label="Phone"
@@ -31,8 +32,8 @@
         <b-form-input
           id="phone-input-form"
           v-model="userPhone"
-          type="text"
-          placeholder="Input phone number" />
+          :placeholder="$t('profileModal.placeholder.phone')"
+          type="text"/>
       </b-form-group>
       <b-form-group
         label="Bio"
@@ -42,7 +43,7 @@
           id="input-bio-form"
           v-model="userBio"
           :rows="3"
-          :placeholder="`${nameState || 'Друг'} , расскажи немного о себе`" />
+          :placeholder="`${nameState || 'Друг'} , ${ $t('profileModal.placeholder.bio') }`" />
 
       </b-form-group>
     </b-form>
