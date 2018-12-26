@@ -2,36 +2,51 @@
   <div>
     <b-btn
       v-b-modal="'submit-modal'">
-      Отправить решение
+      {{ $t('submitModal.btns.modal') }}
     </b-btn>
 
     <b-modal
       id="submit-modal"
+      :body-class="['submit-body']"
+      hide-header
       hide-footer>
+      <b-card no-body>
+        <b-tabs
+          pills
+          card>
+          <b-tab
+            :title="$t('submitModal.ml.title')"
+            active>
+            <b-form>
+              <b-form-group>
+                <b-input
+                  :placeholder="$t('submitModal.ml.placeholder.load')"/>
+              </b-form-group>
+              <b-form-group>
+                <b-input
+                  :placeholder="$t('submitModal.ml.placeholder.comment')"/>
+              </b-form-group>
+              <b-btn>{{ $t('submitModal.btns.submit') }}</b-btn>
+            </b-form>
+          </b-tab>
 
-      <b-tabs>
-        <b-tab>
-          <b-form>
+          <b-tab :title="$t('submitModal.prototype.title')">
             <b-form-group>
-              <b-input />
+              <b-input
+                :placeholder="$t('submitModal.prototype.placeholder.name')"/>
             </b-form-group>
             <b-form-group>
-              <b-input />
+              <b-input
+                :placeholder="$t('submitModal.prototype.placeholder.description')"/>
             </b-form-group>
-            <b-btn>Load</b-btn>
-          </b-form>
-        </b-tab>
-
-        <b-tab>
-          <b-form-group>
-            <b-input />
-          </b-form-group>
-          <b-form-group>
-            <b-input />
-          </b-form-group>
-          <b-btn>Send</b-btn>
-        </b-tab>
-      </b-tabs>
+            <b-form-group>
+              <b-input
+                :placeholder="$t('submitModal.prototype.placeholder.link')"/>
+            </b-form-group>
+            <b-btn>{{ $t('submitModal.btns.submit') }}</b-btn>
+          </b-tab>
+        </b-tabs>
+      </b-card>
     </b-modal>
   </div>
 </template>
@@ -48,6 +63,9 @@
   }
 </script>
 
-<style scoped>
+<style>
+.submit-body {
+  padding: 0;
+}
 
 </style>
