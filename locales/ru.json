@@ -53,5 +53,38 @@
       "city": "Город",
       "occupation": "Место работы или учёбы"
     }
+  },
+  "profileModal": {
+    "btns": {
+      "profile": "мой профиль",
+      "logout": "выйти"
+    },
+    "placeholder": {
+      "email": "email",
+      "name": "полное имя",
+      "phone": "номер телефона",
+      "bio": "о себе"
+    }
+  },
+  "submitModal": {
+    "ml": {
+      "title": "ml задача",
+      "placeholder": {
+        "load": "файл с решением",
+        "comment": "добавить комментарий"
+      }
+    },
+    "prototype":  {
+      "title": "прототип",
+      "placeholder": {
+        "name": "название прототипа",
+        "description": "описание прототипа",
+        "link": "ссылка на прототип"
+      }
+    },
+    "btns": {
+      "modal": "отправить решение",
+      "submit": "отправить решение"
+    }
   }
 }

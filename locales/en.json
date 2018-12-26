@@ -53,5 +53,38 @@
       "city": "City",
       "occupation": "Occupation"
     }
+  },
+  "profileModal": {
+    "btns": {
+      "profile": "my profile",
+      "logout": "logout"
+    },
+    "placeholder": {
+      "email": "email",
+      "name": "full name",
+      "phone": "phone number",
+      "bio": "about self"
+    }
+  },
+  "submitModal": {
+    "ml": {
+      "title": "ml task",
+      "placeholder": {
+        "load": "solution file",
+        "comment": "you can write you comment here"
+      }
+    },
+    "prototype":  {
+      "title": "prototype",
+      "placeholder": {
+        "name": "prototype title",
+        "description": "prototype description",
+        "link": "link to the prototype"
+      }
+    },
+    "btns": {
+      "modal": "send solution",
+      "submit": "submit"
+    }
   }
 }
