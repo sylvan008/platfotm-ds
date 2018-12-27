@@ -2,9 +2,8 @@ const mocks = {
   'auth': { 'POST': { token: 'This-is-a-mocked-token' } },
   'user/me': {
     'GET': {
-
-      title: 'sir',
       email: 'mymail@mail.ru',
+      username: 'sylvan008',
       phone: '12345678888',
       bio: 'about me',
 
