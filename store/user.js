@@ -9,7 +9,16 @@ export const state = () => ({
 });
 
 export const getters = {
-  getProfile: state => state.profile,
+  getProfile: state => {
+    const profile = {};
+    ({
+      username: profile.username,
+      email: profile.email,
+      phone: profile.phone,
+      bio: profile.bio } = state.profile);
+
+    return profile
+  },
   isProfileLoaded: state => !!state.profile.name,
 };
 
@@ -43,6 +52,16 @@ export const actions = {
           reject(err);
         })
     })
+  },
+  UPDATE_PROFILE: ({commit, dispatch}, profile) => {
+    return new Promise((resolve, reject) => {
+      // some response...
+      setTimeout(resolve(), 500)
+    })
+      .then(() => {
+        commit('update_profile', profile)
+      })
+      .catch(err => console.log(err));
   }
 };
 
@@ -63,5 +82,12 @@ export const mutations = {
   },
   user_join: (state, resp) => {
     state.join = resp.token.join
+  },
+  update_profile: (state, profile) => {
+    ({
+      username: state.profile.username,
+      phone: state.profile.phone,
+      bio: state.profile.bio
+    } = profile)
   }
 };
