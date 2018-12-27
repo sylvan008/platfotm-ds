@@ -1,7 +1,8 @@
 <template>
   <b-modal
     id="profile-modal"
-    hide-footer>
+    hide-footer
+    @shown="initForm()">
     <b-form>
       <b-form-group
         label="Email"
@@ -9,7 +10,7 @@
         <!--suppress CheckEmptyScriptTag -->
         <b-form-input
           id="email-input-form"
-          :value="mailState"
+          :value="form.email"
           :placeholder="$t('profileModal.placeholder.email')"
           type="email"
           disabled />
@@ -20,7 +21,7 @@
         <!--suppress CheckEmptyScriptTag -->
         <b-form-input
           id="name-input-form"
-          v-model="userName"
+          v-model="form.username"
           :placeholder="$t('profileModal.placeholder.name')"
           type="text"
           required/>
@@ -31,7 +32,7 @@
         <!--suppress CheckEmptyScriptTag -->
         <b-form-input
           id="phone-input-form"
-          v-model="userPhone"
+          v-model="form.phone"
           :placeholder="$t('profileModal.placeholder.phone')"
           type="text"/>
       </b-form-group>
@@ -41,61 +42,47 @@
         <!--suppress CheckEmptyScriptTag -->
         <b-form-textarea
           id="input-bio-form"
-          v-model="userBio"
+          v-model="form.bio"
           :rows="3"
           :placeholder="`${nameState || 'Друг'} , ${ $t('profileModal.placeholder.bio') }`" />
 
       </b-form-group>
+      <b-btns @click="update()">
+        Обновить
+      </b-btns>
     </b-form>
   </b-modal>
 </template>
 
 <script>
   import { createNamespacedHelpers } from 'vuex';
-  const { mapState, mapMutations } = createNamespacedHelpers('user');
+  const { mapState, mapMutations, mapActions } = createNamespacedHelpers('user');
 
 
   export default {
     name: "DsProfileModal",
+    props: {
+      profile: {
+        type: Object,
+        required: true
+      }
+    },
     data() {
       return {
         form: {
-          name: '',
-          phone: '',
-          bio: ''
         }
       }
     },
-    computed: {
-      ...mapState({
-        mailState: state => state.profile.email,
-        nameState: state => state.profile.name,
-        phoneState: state => state.profile.phone,
-        bioState: state => state.profile.bio
-      }),
-      userBio: {
-        get() {
-          return this.form.bio || this.bioState
-        },
-        set(value) {
-          this.form.bio = value
-        }
+    created() {
+      this.initForm();
+    },
+    methods: {
+      ...mapActions(['UPDATE_PROFILE']),
+      initForm() {
+        this.form = Object.assign({}, this.profile)
       },
-      userPhone: {
-        get() {
-          return this.form.phone || this.phoneState
-        },
-        set(value) {
-          this.form.phone = value
-        }
-      },
-      userName: {
-        get() {
-          return this.form.name || this.nameState
-        },
-        set(value) {
-          this.form.name = value
-        }
+      update() {
+        this.UPDATE_PROFILE(this.form)
       }
     }
   }

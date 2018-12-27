@@ -51,7 +51,9 @@
           </b-btn>
 
           <ds-modal-login v-show="!isLogin"/>
-          <ds-profile-modal v-if="isLogin"/>
+          <ds-profile-modal
+            v-if="isLogin && isProfileLoaded"
+            :profile="getProfile"/>
 
           <ds-join-modal
             v-if="(isLogin && !$store.state.user.join)"
@@ -107,6 +109,7 @@
     },
     computed: {
       ...mapGetters('auth', ['isAuthenticated']),
+      ...mapGetters('user', ['getProfile', 'isProfileLoaded']),
       ...mapState('user', { joinProfile: state => state.profile}),
       isLogin() {
         return this.isAuthenticated
