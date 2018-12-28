@@ -19,7 +19,9 @@
             active>
             <b-form>
               <b-form-group>
-                <b-input
+                <b-form-file
+                  v-model="form.file"
+                  :state="Boolean(form.file)"
                   :placeholder="$t('submitModal.ml.placeholder.load')"/>
               </b-form-group>
               <b-form-group>
@@ -28,6 +30,8 @@
               </b-form-group>
               <b-btn>{{ $t('submitModal.btns.submit') }}</b-btn>
             </b-form>
+            Selected file: {{ form.file && form.file.name }}<br>
+            File size: {{ form.file && form.file.type }}
           </b-tab>
 
           <b-tab :title="$t('submitModal.prototype.title')">
@@ -58,6 +62,13 @@
       idModal: {
         type: String,
         required: true
+      }
+    },
+    data() {
+      return {
+        form: {
+          file: null
+        }
       }
     }
   }
