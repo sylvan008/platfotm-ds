@@ -44,12 +44,12 @@
           id="input-bio-form"
           v-model="form.bio"
           :rows="3"
-          :placeholder="`${nameState || 'Друг'} , ${ $t('profileModal.placeholder.bio') }`" />
+          :placeholder="`${profile.name || 'Друг'} , ${ $t('profileModal.placeholder.bio') }`" />
 
       </b-form-group>
-      <b-btns @click="update()">
+      <b-btn @click="update()">
         Обновить
-      </b-btns>
+      </b-btn>
     </b-form>
   </b-modal>
 </template>
