@@ -20,21 +20,24 @@
             :title="$t('submitModal.ml.title')"
             active>
             <b-form>
+
               <b-form-group>
-                <b-form-file
-                  v-model="uploadForm.file"
-                  :state="Boolean(uploadForm.file)"
+                <ds-file-input
+                  v-model="dsFile"
+                  :upload-icon="uploadForm.uploadIcon"
                   :placeholder="$t('submitModal.ml.placeholder.load')"/>
-                <span :class="['upload-icon', 'fa', uploadForm.uploadIcon]" />
               </b-form-group>
+
               <b-form-group>
                 <b-input
                   v-model="uploadForm.comment"
                   :placeholder="$t('submitModal.ml.placeholder.comment')"/>
               </b-form-group>
+
               <b-btn>{{ $t('submitModal.btns.submit') }}</b-btn>
+
             </b-form>
-            Selected file: {{ uploadForm.file && uploadForm.file.name }}<br>
+            Selected file: {{ dsFile && dsFile.name }}<br>
             File size: {{ uploadForm.file && uploadForm.file.type }}
           </b-tab>
 
@@ -65,8 +68,13 @@
 </template>
 
 <script>
+  import DsFileInput from './form/DsFileInput';
+
   export default {
     name: "DsSubmitModal",
+    components: {
+      DsFileInput
+    },
     props: {
       idModal: {
         type: String,
@@ -84,7 +92,8 @@
           name: '',
           description: '',
           link:''
-        }
+        },
+        dsFile: null
       }
     },
     computed: {
@@ -144,16 +153,6 @@
 </script>
 
 <style>
-.upload-icon {
-  width: 40px;
-  height: 40px;
-  font-size: 15px;
-  border-radius: 50%;
-  color: white;
-  background-color: green;
-  text-align: center;
-  vertical-align: center;
-  padding: 0;
-}
+
 
 </style>
