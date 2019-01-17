@@ -13,7 +13,10 @@
       {{ selectLabel }}
     </label>
     <span class="upload-icon">
-      <i :class="['fa', uploadIcon]" />
+      <i
+        v-if="!uploadStart"
+        :class="['fa', selectUploadIcon]" />
+      <template v-else> {{ progressUpload + '%' }} </template>
     </span>
   </div>
 </template>
@@ -30,9 +33,21 @@
         type: Boolean,
         default: false
       },
-      'upload-icon': {
+      uploadIconStart: {
         type: String,
         default: 'fa-upload'
+      },
+      uploadIconEnd: {
+        type: String,
+        default: 'fa-check'
+      },
+      uploadStart: {
+        type: Boolean,
+        default: false
+      },
+      progressUpload: {
+        type: Number,
+        default: 0
       }
     },
     data () {
@@ -59,6 +74,14 @@
 
         // Single file
         return this.selectedFile.name
+      },
+      selectUploadIcon() {
+        if (this.progressUpload === 0) {
+          return this.uploadIconStart
+        }
+        if (this.progressUpload === 100) {
+          return this.uploadIconEnd
+        }
       }
     },
     watch: {
@@ -146,14 +169,14 @@
   .upload-icon {
     position: absolute;
     right: 1rem;
-    top: 0;
+    top: -0.3rem;
     z-index: 1;
     width: 3rem;
     height: 3rem;
-    font-size: 15px;
     border-radius: 50%;
     color: white;
-    background-color: green;
+    background-color: rebeccapurple;
+    /*background-color: green;*/
     text-align: center;
     line-height: 3rem;
   }
@@ -161,6 +184,7 @@
   .custom-file-label {
     width: 80%;
     overflow: hidden;
+    white-space: nowrap;
   }
 
   .custom-file-label:after {
