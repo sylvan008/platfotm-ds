@@ -23,9 +23,10 @@
 
               <b-form-group>
                 <ds-file-input
-                  v-model="dsFile"
-                  :upload-icon="uploadForm.uploadIcon"
-                  :placeholder="$t('submitModal.ml.placeholder.load')"/>
+                  v-model="uploadForm.file"
+                  :placeholder="$t('submitModal.ml.placeholder.load')"
+                  :upload-start="uploadForm.uploadStart"
+                  :progress-upload="uploadForm.progressCurrent"/>
               </b-form-group>
 
               <b-form-group>
@@ -34,7 +35,9 @@
                   :placeholder="$t('submitModal.ml.placeholder.comment')"/>
               </b-form-group>
 
-              <b-btn>{{ $t('submitModal.btns.submit') }}</b-btn>
+              <b-btn :disabled="readyToUpload || uploadForm.uploadStart">
+                {{ $t('submitModal.btns.submit') }}
+              </b-btn>
 
             </b-form>
             Selected file: {{ dsFile && dsFile.name }}<br>
@@ -86,29 +89,29 @@
         uploadForm: {
           file: null,
           comment: '',
-          uploadIcon: 'fa-upload'
+          uploadStart: false,
+          progressCurrent: 0
         },
         prototypeForm: {
           name: '',
           description: '',
           link:''
-        },
-        dsFile: null
-      }
-    },
-    computed: {
-      fileUploadIndicateClasses() {
-        return {
-          uploadIndicate: true,
-
         }
       }
     },
+    computed: {
+      readyToUpload() {
+        return (this.uploadForm.file === null ||
+          (this.uploadForm.comment === '' || this.uploadForm.comment.length < 3))
+      }
+    },
     methods: {
-      async getSignedRequest(file){
-        try {
+      async getSignedRequest(file) {
+        let validateFile;
 
-          const validateFile = await this.$axios({
+        try {
+          // Sends a request to validate file
+          validateFile = await this.$axios({
             method: 'get',
             url: '/sign_s3',
             params: {
@@ -120,17 +123,15 @@
               return status === 200
             }
           });
-
-          this.uploadFile(file, validateFile.data);
-
         } catch (error) {
           console.log(error);
           alert("Невозможно проверить файл. Пожалуйста, повторите попытку.")
         }
-
-
+        // Start upload file
+        this.uploadFile(file, validateFile.data);
       },
       async uploadFile(file, s3Data) {
+        // Added the generate file name and file
         const postData = new FormData();
         for (let key in s3Data.fields) {
           if (s3Data.fields.hasOwnProperty(key)) {
@@ -139,14 +140,29 @@
         }
         postData.append('file', file);
 
-        await this.$axios({
-          method: 'post',
-          url: s3Data.url,
-          data: postData,
-          onUploadProgress(progressEvent) {
+        try {
+          await this.$axios({
+            method: 'post',
+            url: s3Data.url,
+            data: postData,
+            onUploadProgress(progressEvent) {
+              if (this.uploadForm.readyToUpload) {
+                this.uploadForm.readyToUpload = false;
+                this.uploadForm.uploadStart = true;
+              }
 
-          }
-        })
+              this.uploadForm.progressCurrent = Math.round(100 * progressEvent.loaded / progressEvent.total);
+            },
+            validateStatus(status) {
+              return status === 200 || status === 204
+            }
+          });
+        } catch (error) {
+          console.log(error);
+          alert('Невозможно загрузить файл. Пожалуйста, повторите попытку.');
+        }
+
+        this.uploadFile.uploadStart = false;
       }
     }
   }
