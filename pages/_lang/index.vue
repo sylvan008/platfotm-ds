@@ -18,14 +18,29 @@
           class="button--grey">GitHub</a>
         <nuxt-link to="/about">About</nuxt-link>
       </div>
+
+      <p>competitions items: {{ competitionsItems }}</p>
     </div>
   </section>
 </template>
 
 <script>
-export default {
-  name: 'Index'
-}
+  import { createNamespacedHelpers } from 'vuex';
+  const { mapActions, mapState } = createNamespacedHelpers('competitionsPreview');
+
+  export default {
+    name: 'Index',
+    computed: {
+      ...mapState(['competitionsItems'])
+    },
+    created() {
+
+      this.getCompetitionsItems({offset: 0, limit: 0});
+    },
+    methods: {
+      ...mapActions(['getCompetitionsItems'])
+    }
+  }
 </script>
 
 <style>
